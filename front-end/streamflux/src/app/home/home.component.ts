@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
 import { Router } from '@angular/router';
+import { FooterComponent } from '../footer/footer.component';
+import { HeaderComponent } from '../header/header.component';
 // import "leaflet/dist/images/marker-shadow.png";  
 // import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 // import markerIcon from 'leaflet/dist/images/marker-icon.png';
@@ -10,7 +12,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
 
