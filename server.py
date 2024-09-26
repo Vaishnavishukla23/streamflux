@@ -3,6 +3,8 @@ from flask_cors import CORS
 from pymongo import MongoClient
 import os
 
+import pymongo
+
 app = Flask(__name__)
 CORS(app)
 
@@ -34,6 +36,19 @@ def retrieve_data():
     data = list(collection.find(query_params, {'_id': 0}))  # Exclude the _id field in the response
     
     return jsonify(data), 200
+
+@app.route('/live', methods=['POST'])
+def live_data():
+    # Get filter parameters from request headers
+    data = request.get_json()
+    device_id = data.get('device_id')
+    query_params = dict({'device_id': device_id})
+    
+    # Retrieve data from MongoDB
+    data = list(collection.find(query_params, {'_id': 0}).sort("timestamp", pymongo.DESCENDING))  # Exclude the _id field in the response
+    
+    return jsonify(data[0]), 200
+
 
 @app.route('/delete', methods=['POST'])
 def delete():
