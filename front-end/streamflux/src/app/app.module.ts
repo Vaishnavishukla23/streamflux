@@ -9,6 +9,7 @@ import { DeviceDataComponent } from './device-data/device-data.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { NgChartsModule } from 'ng2-charts';  // <-- Importing NgChartsModule
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -21,14 +22,16 @@ const routes: Routes = [
     HomeComponent,
     DeviceDataComponent,
     HeaderComponent,
-    FooterComponent  // Create this component separately for pin details
+    FooterComponent // Create this component separately for pin details
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     LeafletModule,
     RouterModule.forRoot(routes),
-    HttpClientModule
+    HttpClientModule,
+    NgChartsModule 
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
