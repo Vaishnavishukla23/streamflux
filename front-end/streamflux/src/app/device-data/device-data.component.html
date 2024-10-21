@@ -1,62 +1,84 @@
 <div class="container">
   <h2 class="heading">Device Data for ID: {{ deviceId }}</h2>
 
+  <!-- Button to toggle between table and graph -->
+  <button (click)="toggleView()" class="btn btn-primary toggle-button">
+    Switch to {{ showTable ? 'Graph' : 'Table' }}
+  </button>
+
   <!-- Toggle button to switch between mock and real data -->
-  <button (click)="toggleData()" class="btn btn-primary toggle-button">
+  <button (click)="toggleData()" class="btn btn-secondary toggle-button">
     {{ isUsingMockData ? 'Switch to Real Data' : 'Switch to Mock Data' }}
   </button>
 
-  <div class="table-responsive" >
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>Device ID</th>
-          <th>Live Water Level</th>
-          <th>Timestamp</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>{{ live_data.device_id }}</td>
-          <td>{{ live_data.water_level }}</td>
-          <td>{{ live_data.timestamp }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-<br>
-  <hr>
-  <br>
-  <!-- Error message display -->
-  <div *ngIf="errorMessage" class="alert alert-danger">
-    <strong>Error: </strong>{{ errorMessage }}
-  </div>
-
-  <!-- Table to display device data -->
-  <div class="table-responsive" *ngIf="data.length > 0; else noData">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>Device ID</th>
-          <th>Water Level</th>
-          <th>Timestamp</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of data">
-          <td>{{ item.device_id }}</td>
-          <td>{{ item.water_level }}</td>
-          <td>{{ item.timestamp }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- Fallback when no data is available -->
-  <ng-template #noData>
-    <div class="alert alert-info no-data-alert">
-      <p>No data available for the selected device.</p>
+  <!-- Conditionally show either the table or the graph based on showTable -->
+  <div *ngIf="showTable; else graphView">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Device ID</th>
+            <th>Live Water Level</th>
+            <th>Timestamp</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ live_data.device_id }}</td>
+            <td>{{ live_data.water_level }}</td>
+            <td>{{ live_data.timestamp | date:'short' }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+
+    <br>
+    <hr>
+    <br>
+
+    <!-- Error message display -->
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      <strong>Error: </strong>{{ errorMessage }}
+    </div>
+
+    <!-- Table to display historical data -->
+    <div class="table-responsive" *ngIf="data.length > 0; else noData">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Device ID</th>
+            <th>Water Level</th>
+            <th>Timestamp</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of data">
+            <td>{{ item.device_id }}</td>
+            <td>{{ item.water_level }}</td>
+            <td>{{ item.timestamp | date:'short' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Fallback when no data is available -->
+    <ng-template #noData>
+      <div class="alert alert-info no-data-alert">
+        <p>No data available for the selected device.</p>
+      </div>
+    </ng-template>
+  </div>
+
+  <!-- Chart view -->
+  <ng-template #graphView>
+    <div class="myChartWrapper">
+    <div style="display: block;" class="myChart">
+      <canvas baseChart
+              [data]="chartData"
+              [options]="chartOptions"
+              [type]="scatterChartType">
+      </canvas>
+    </div>
+  </div>
   </ng-template>
 </div>

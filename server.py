@@ -33,7 +33,7 @@ def retrieve_data():
     query_params = dict({'device_id': device_id})
     
     # Retrieve data from MongoDB
-    data = list(collection.find(query_params, {'_id': 0}))  # Exclude the _id field in the response
+    data = list(collection.find(query_params, {'_id': 0}).sort("timestamp", pymongo.DESCENDING))  # Exclude the _id field in the response
     
     return jsonify(data), 200
 

@@ -20,8 +20,11 @@
     "@angular/router": "^15.2.0",
     "@asymmetrik/ngx-leaflet": "^15.0.1",
     "chart.js": "^3.7.1",
+    "chartjs-plugin-crosshair": "^2.0.0",
+    "chartjs-plugin-zoom": "^2.0.1",
     "leaflet": "^1.9.4",
     "ng2-charts": "^4.1.1",
+    "ngx-pagination": "^6.0.3",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"

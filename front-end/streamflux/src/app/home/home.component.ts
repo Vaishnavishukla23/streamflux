@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
   
   // Sample pins with IDs and coordinates (Latitude, Longitude)
   pins = [
-    { id: 1, name: 'Location 1', lat: 20.5937, lng: 78.9629 },  // Sample India coordinates
+    { id: 1, name: 'Location 1', lat: 12.8230, lng: 80.0444 },  // Sample India coordinates
     { id: 2, name: 'Location 2', lat: 19.0760, lng: 72.8777 },
     { id: 3, name: 'Location 3', lat: 28.7041, lng: 77.1025 }
   ];

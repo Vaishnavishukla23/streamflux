@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { NgChartsModule } from 'ng2-charts';  // <-- Importing NgChartsModule
+import { NgxPaginationModule } from 'ngx-pagination';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -20,7 +21,6 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     HomeComponent,
-    DeviceDataComponent,
     HeaderComponent,
     FooterComponent // Create this component separately for pin details
   ],
@@ -30,7 +30,9 @@ const routes: Routes = [
     LeafletModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
-    NgChartsModule 
+    NgChartsModule,
+    NgxPaginationModule ,
+    DeviceDataComponent
     
   ],
   providers: [],
