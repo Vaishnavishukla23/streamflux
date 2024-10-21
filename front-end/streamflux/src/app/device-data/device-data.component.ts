@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { NgChartsModule } from 'ng2-charts';
 import zoomPlugin from 'chartjs-plugin-zoom';
 Chart.register(zoomPlugin);
+import 'chartjs-plugin-crosshair';
 
 
 @Component({
