@@ -12,6 +12,7 @@ CORS(app)
 client = MongoClient('mongodb+srv://spotoverflow:spotoverflow@devcluster.kd5d8.mongodb.net/?retryWrites=true&w=majority&appName=devCluster')
 db = client['realtime-monitordb']
 collection = db['realtime-monitor-cluster']
+users={"Vaishnavi":"vaish"}
 
 @app.route('/store', methods=['POST'])
 def store_data():
@@ -54,6 +55,22 @@ def live_data():
 def delete():
     numbers=collection.delete_many({})
     return jsonify(numbers.deleted_count)
+
+@app.route('/api/login', methods=['POST'])
+def login():
+    data = request.json
+
+    username = data.get('username')
+    password = data.get('password')
+
+    print(username)
+    print(password)
+    print(users)
+    if username in users and users[username] == password:
+        return jsonify({'success': True, 'message': 'Login successful'}), 200
+    else:
+        return jsonify({'success': False, 'message': 'Invalid credentials'}), 401
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0' ,debug=True)

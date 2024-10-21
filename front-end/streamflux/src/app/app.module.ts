@@ -9,8 +9,10 @@ import { DeviceDataComponent } from './device-data/device-data.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { NgChartsModule } from 'ng2-charts';  // <-- Importing NgChartsModule
+import { NgChartsModule,BaseChartDirective } from 'ng2-charts';  // <-- Importing NgChartsModule
 import { NgxPaginationModule } from 'ngx-pagination';
+import { LoginComponent } from './login/login.component';
+
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -22,7 +24,7 @@ const routes: Routes = [
     AppComponent,
     HomeComponent,
     HeaderComponent,
-    FooterComponent // Create this component separately for pin details
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +34,8 @@ const routes: Routes = [
     HttpClientModule,
     NgChartsModule,
     NgxPaginationModule ,
-    DeviceDataComponent
+    DeviceDataComponent,
+    LoginComponent
     
   ],
   providers: [],

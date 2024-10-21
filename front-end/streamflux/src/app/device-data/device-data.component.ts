@@ -61,7 +61,7 @@ export class DeviceDataComponent implements OnInit {
           pinch: {
             enabled: true
           },
-          mode: 'xy',
+          mode: 'x',
           
         }
       }
