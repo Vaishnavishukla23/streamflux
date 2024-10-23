@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { NgChartsModule } from 'ng2-charts';
 import zoomPlugin from 'chartjs-plugin-zoom';
 Chart.register(zoomPlugin);
+import { NgxPaginationModule } from 'ngx-pagination';
 import 'chartjs-plugin-crosshair';
 
 
@@ -14,9 +15,10 @@ import 'chartjs-plugin-crosshair';
   templateUrl: './device-data.component.html',
   styleUrls: ['./device-data.component.css'],
   standalone: true,
-  imports: [CommonModule, NgChartsModule]
+  imports: [CommonModule, NgChartsModule,NgxPaginationModule]
 })
 export class DeviceDataComponent implements OnInit {
+  p: number = 1;
   deviceId: string = 'ABC123';  // Temporary device ID for testing
   data: any[] = [];  // Array to store the historical response data
   errorMessage: string | null = null;
@@ -80,7 +82,8 @@ export class DeviceDataComponent implements OnInit {
 
     // Initially load mock data
     this.loadMockData();
-    this.getLiveData();  // Start fetching live data
+    this.getLiveData();
+    setInterval(()=> { this.getLiveData() }, 7 * 1000);
   }
 
   // Switch between table and graph views
@@ -115,6 +118,8 @@ export class DeviceDataComponent implements OnInit {
         this.live_data = response;  // Assign live data
         this.errorMessage = null;  // Clear any previous errors
         this.updateChartData();  // Update the chart with the live data
+        if(this.live_data.water_level<10 || this.live_data.water_level>500 )
+          alert("WATER LEVEL TOO HIGH!!")
       },
       error => {
         console.error('Error fetching data', error);
@@ -129,6 +134,10 @@ export class DeviceDataComponent implements OnInit {
       response => {
         this.data = response;  // Assign response to data array
         this.errorMessage = null;  // Clear any previous errors
+        this.data.sort(function(a,b){
+          return parseFloat(a.start) - parseFloat(b.start);
+        });
+        
         this.updateChartData();  // Update chart with real data
       },
       error => {

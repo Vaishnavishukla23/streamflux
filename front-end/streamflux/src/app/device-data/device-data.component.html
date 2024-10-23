@@ -18,6 +18,8 @@
         <thead>
           <tr>
             <th>Device ID</th>
+            <th>Live Temperature</th>
+            <th>Live Humidity</th>
             <th>Live Water Level</th>
             <th>Timestamp</th>
           </tr>
@@ -25,8 +27,10 @@
         <tbody>
           <tr>
             <td>{{ live_data.device_id }}</td>
+            <td>{{ live_data.temperature | number : '1.2-2' }} C</td>
+            <td>{{ live_data.humidity | number : '1.2-2' }}%</td>
             <td>{{ live_data.water_level }}</td>
-            <td>{{ live_data.timestamp | date:'short' }}</td>
+            <td>{{ live_data.timestamp | date:'long' }}</td>
           </tr>
         </tbody>
       </table>
@@ -42,24 +46,39 @@
     </div>
 
     <!-- Table to display historical data -->
-    <div class="table-responsive" *ngIf="data.length > 0; else noData">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th>Device ID</th>
-            <th>Water Level</th>
-            <th>Timestamp</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of data">
-            <td>{{ item.device_id }}</td>
-            <td>{{ item.water_level }}</td>
-            <td>{{ item.timestamp | date:'short' }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+   <!-- Historical data table -->
+<div class="table-responsive" *ngIf="data.length > 0; else noData">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Device ID</th>
+        <th>Temperature</th>
+        <th>Humidity</th>
+        <th>Water Level</th>
+        <th>Timestamp</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of data | paginate: { itemsPerPage: 15, currentPage: p }">
+        <td>{{ item.device_id }}</td>
+        <td>{{ item.temperature | number : '1.2-2' }} C</td>
+        <td>{{ item.humidity | number : '1.2-2' }}%</td>
+        <td>{{ item.water_level }}</td>
+        <td>{{ item.timestamp | date:'long' }}</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <!-- Pagination Controls -->
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
+
+<!-- Fallback when no data is available -->
+<ng-template #noData>
+  <div class="alert alert-info no-data-alert">
+    <p>No data available for the selected device.</p>
+  </div>
+</ng-template>
 
     <!-- Fallback when no data is available -->
     <ng-template #noData>

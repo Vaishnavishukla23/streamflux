@@ -20,8 +20,10 @@ DHT dht(DHTPIN,DTYPE,15);
 // defines variables
 long duration;
 int distance;
- const String ssid="Vaish ";
- const String password="rhyc0978";
+ const String ssid="JioFi3_1E2E6C";
+ const String password="va1eh8mmpm";
+//  const String ssid="Vaish ";
+//  const String password="rhyc0978";
  //const String ssid="Mayank's iPhone";
  //const String password="mayank123";
 
@@ -56,7 +58,7 @@ void callApi(int distance, float temperature, float humidity, String timestamp) 
     HTTPClient http;
 
 /********************************REPLACE IP HERE:**********************************************/
-    String serverPath = "http:///192.168.225.218:5000/store";
+    String serverPath = "http://192.168.225.218:5000/store";
     http.begin(client, serverPath);
      http.addHeader("Content-Type", "application/x-www-form-urlencoded");
     char distance_value[10];
@@ -125,6 +127,10 @@ duration = pulseIn(echoPin, HIGH);
 
 // Calculating the distance
 distance= duration*0.034/2;
+if(distance>200)
+{
+distance/=1000;
+}
 float humidity = dht.readHumidity();
 float temperature = dht.readTemperature();
  while (isnan(humidity) || isnan(temperature) || humidity>100.0 || temperature < 16.0) {

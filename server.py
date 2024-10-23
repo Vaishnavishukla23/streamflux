@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from pymongo import MongoClient
@@ -34,9 +35,10 @@ def retrieve_data():
     query_params = dict({'device_id': device_id})
     
     # Retrieve data from MongoDB
-    data = list(collection.find(query_params, {'_id': 0}).sort("timestamp", pymongo.DESCENDING))  # Exclude the _id field in the response
-    
-    return jsonify(data), 200
+    data = list(collection.find(query_params, {'_id': 0}))  # Exclude the _id field in the response
+    # sorted(data,key=lambda x: datetime.strptime(x['timestamp'], '%Y/%m/%d %H:%M:%S'))
+
+    return jsonify(data[::-1]), 200
 
 @app.route('/live', methods=['POST'])
 def live_data():
@@ -46,9 +48,10 @@ def live_data():
     query_params = dict({'device_id': device_id})
     
     # Retrieve data from MongoDB
-    data = list(collection.find(query_params, {'_id': 0}).sort("timestamp", pymongo.DESCENDING))  # Exclude the _id field in the response
-    
-    return jsonify(data[0]), 200
+    data = list(collection.find(query_params, {'_id': 0}))  # Exclude the _id field in the response
+    sorted(data,key=lambda x: datetime.strptime(x['timestamp'], '%Y/%m/%d %H:%M:%S'))
+    print(data[-1])
+    return jsonify(data[-1]), 200
 
 
 @app.route('/delete', methods=['POST'])
