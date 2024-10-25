@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class FlaskApiService {
 
-  private apiUrl = 'https://vaishnavi23.pythonanywhere.com/'; // Replace with your Flask API URL
+  private apiUrl = 'https://streamflux.onrender.com/'; // Replace with your Flask API URL
 
   constructor(private http: HttpClient) { }
 

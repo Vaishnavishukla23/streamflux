@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
 
 
    defaultIcon =  L.icon({
-    iconUrl: 'marker-icon.png', 
+    iconUrl: 'assets/marker.png', 
     
     iconSize: [30, 30],
     iconAnchor: [2, 2],

@@ -25,7 +25,7 @@ export class LoginComponent {
       password: this.password
     };
 
-    this.http.post<any>('https://vaishnavi23.pythonanywhere.com/api/login', credentials)
+    this.http.post<any>('https://streamflux.onrender.com/api/login', credentials)
       .subscribe({
         next: (response) => {
           if (response.success) {
