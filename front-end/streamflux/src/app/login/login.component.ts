@@ -25,7 +25,7 @@ export class LoginComponent {
       password: this.password
     };
 
-    this.http.post<any>('http://127.0.0.1:5000/api/login', credentials)
+    this.http.post<any>('https://vaishnavi23.pythonanywhere.com/api/login', credentials)
       .subscribe({
         next: (response) => {
           if (response.success) {
