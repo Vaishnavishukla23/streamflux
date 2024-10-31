@@ -13,7 +13,7 @@ CORS(app)
 client = MongoClient('mongodb+srv://spotoverflow:spotoverflow@devcluster.kd5d8.mongodb.net/?retryWrites=true&w=majority&appName=devCluster')
 db = client['realtime-monitordb']
 collection = db['realtime-monitor-cluster']
-users={"Vaishnavi":"vaish"}
+users={"Vaishnavi": "vaish", "testUser": "password"}
 
 @app.route('/store', methods=['POST'])
 def store_data():
