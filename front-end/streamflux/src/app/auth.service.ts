@@ -11,7 +11,7 @@ export class AuthService {
   login(username: string, password: string): boolean {
     // You would normally make a request to your API here
     // Simulating a login with hardcoded values
-    if (username === 'Vaishnavi' && password === 'vaish') {
+    if ((username === 'Vaishnavi' && password === 'vaish') || (username === 'testUser' && password === 'password') ) {
       this.loggedIn = true;
       return true;
     }
