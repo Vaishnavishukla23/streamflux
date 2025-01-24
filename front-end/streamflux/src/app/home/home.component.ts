@@ -3,6 +3,7 @@ import * as L from 'leaflet';
 import { Router } from '@angular/router';
 import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
+import { AuthService } from '../auth.service';
 // import "leaflet/dist/images/marker-shadow.png";  
 // import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 // import markerIcon from 'leaflet/dist/images/marker-icon.png';
@@ -16,7 +17,7 @@ import { HeaderComponent } from '../header/header.component';
 })
 export class HomeComponent implements OnInit {
 
-
+  name!:string;
    defaultIcon =  L.icon({
     iconUrl: 'assets/marker.png', 
     
@@ -34,9 +35,11 @@ export class HomeComponent implements OnInit {
     { id: 3, name: 'Location 3', lat: 28.7041, lng: 77.1025 }
   ];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,    private authService: AuthService
+  ) { }
 
   ngOnInit() {
+   
     // this.map = L.map("map").setView([46.879966, -121.726909], 7);
 
 //     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -46,7 +49,8 @@ export class HomeComponent implements OnInit {
 }
   ngAfterViewInit(): void {
     this.initMap();
-    
+    this.name=this.authService.getname();
+    alert("Hi "+this.name);
     // Call this method to force the map to resize correctly
     setTimeout(() => {
       this.map.invalidateSize();

@@ -1,21 +1,37 @@
 import { Injectable } from '@angular/core';
+import { FlaskApiService } from './flask-api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private loggedIn = false;
+  private name='';
+  private admin=false;
+  flaskApiService!: FlaskApiService
+  constructor(flaskApiService: FlaskApiService) {}
 
-  constructor() {}
-
-  login(username: string, password: string): boolean {
-    // You would normally make a request to your API here
-    // Simulating a login with hardcoded values
-    if (username === 'Vaishnavi' && password === 'vaish') {
+  setAdmin(){
+    this.admin=true;
+  }
+  isAdmin()
+  {
+    return this.admin;
+  }
+  login(username: string, password: string, success: boolean, name:string): boolean {
+    // let responseObj= JSON.parse(response)
+    if (success){
       this.loggedIn = true;
-      return true;
+      this.name=name;
+
+return true
     }
-    return false;
+    else
+    this.loggedIn=false;
+  return false;
+  }
+  getname(): string{
+    return this.name;
   }
 
   logout(): void {

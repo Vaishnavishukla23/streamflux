@@ -12,6 +12,8 @@ import { FooterComponent } from './footer/footer.component';
 import { NgChartsModule,BaseChartDirective } from 'ng2-charts';  // <-- Importing NgChartsModule
 import { NgxPaginationModule } from 'ngx-pagination';
 import { LoginComponent } from './login/login.component';
+import { AdminComponent } from './admin/admin.component';
+import { SignupComponent } from './signup/signup.component';
 
 
 const routes: Routes = [
@@ -24,7 +26,9 @@ const routes: Routes = [
     AppComponent,
     HomeComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    AdminComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -35,7 +39,8 @@ const routes: Routes = [
     NgChartsModule,
     NgxPaginationModule ,
     DeviceDataComponent,
-    LoginComponent
+    LoginComponent,
+    SignupComponent
     
   ],
   providers: [],

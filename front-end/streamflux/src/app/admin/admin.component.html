@@ -1,0 +1,26 @@
+<app-header></app-header>
+
+<div class="main-container"></div>
+<div class="container">
+<button (click)="sending=true; sendAlert();" *ngIf="!sending" id="alert">SEND ALERT</button>
+<div  class="spinner" *ngIf="sending"></div>
+</div>
+
+<div class="login-container">
+<table >
+<tr>
+<th>
+    S.No.
+</th>
+<th>Name</th>
+<th>Email</th>
+</tr>
+<tr *ngFor="let user of users; let i=index">
+    <td>{{ i+1 }}</td>
+    <td>{{ user.name }}</td>
+    <td> {{ user.user}} </td>
+</tr>
+</table>
+<div class="spinner" *ngIf="!users"></div>
+</div>
+<app-footer></app-footer>

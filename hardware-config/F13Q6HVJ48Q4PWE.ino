@@ -6,6 +6,8 @@
 #include <NTPClient.h>
 #include "DHT.h"
 #include <WiFiUdp.h>
+#include <WiFiClientSecureBearSSL.h>
+
 // defines pins numbers
 const int trigPin = 2;  //D4
 const int echoPin = 0;  //D3
@@ -20,10 +22,10 @@ DHT dht(DHTPIN,DTYPE,15);
 // defines variables
 long duration;
 int distance;
- const String ssid="JioFi3_1E2E6C";
- const String password="va1eh8mmpm";
-//  const String ssid="Vaish ";
-//  const String password="rhyc0978";
+//  const String ssid="JioFi3_1E2E6C";
+//  const String password="va1eh8mmpm";
+ const String ssid="Vaish ";
+ const String password="rhyc0978";
  //const String ssid="Mayank's iPhone";
  //const String password="mayank123";
 
@@ -54,29 +56,33 @@ void setupwifi()
 void callApi(int distance, float temperature, float humidity, String timestamp) {
   if(WiFi.status() == WL_CONNECTED) {
     Serial.println("Calling API");
-    WiFiClient client;
+
+    // Initialize a direct WiFiClientSecure object instead of a unique pointer
+    BearSSL::WiFiClientSecure client;
+    client.setInsecure();  // Only use this for testing without certificate validation
+
     HTTPClient http;
 
-/********************************REPLACE IP HERE:**********************************************/
-    String serverPath = "http://192.168.225.218:5000/store";
+    // Define the server path
+    String serverPath = "https://streamflux.onrender.com/store";
+    
+    // Start the HTTP connection with the secure client
     http.begin(client, serverPath);
-     http.addHeader("Content-Type", "application/x-www-form-urlencoded");
+    http.addHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    // Format the data payload
     char distance_value[10];
     itoa(distance, distance_value, 10);
-    char temperature_value[10];
-    sprintf(temperature_value, "%f", temperature);
-    char humidity_value[10];
-    sprintf(humidity_value, "%f", humidity);
-    // char timestamp_value[20];
-    // sprintf(timestamp_value,"%s",timestamp);
-    // Serial.println(timestamp);
-    // Serial.println(timestamp_value);
-    // time_t mytime = time(NULL);
-    // char* time_str = ctime(&mytime);
-    // time_str[strlen(time_str) - 1] = '\0';  // Remove newline character
 
-const char* timestamp_value = timestamp.c_str();
-    char httpRequestData[500] = "";  // Initialize the request data as an empty string
+    char temperature_value[10];
+    dtostrf(temperature, 1, 2, temperature_value);  // Format float with 2 decimal places
+
+    char humidity_value[10];
+    dtostrf(humidity, 1, 2, humidity_value);
+
+    const char* timestamp_value = timestamp.c_str();
+    
+    char httpRequestData[500] = "";  // Initialize request data as an empty string
     strcat(httpRequestData, "device_id=1&water_level=");
     strcat(httpRequestData, distance_value);
     strcat(httpRequestData, "&temperature=");
@@ -96,7 +102,8 @@ const char* timestamp_value = timestamp.c_str();
     Serial.println("WiFi disconnected");
     setupwifi();  // Attempt to reconnect to WiFi
   }
-  }
+}
+
 void setup() {
   pinMode(LED, OUTPUT);  
 Serial.begin(9600); // Starts the Serial communication

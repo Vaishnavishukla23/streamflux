@@ -1,0 +1,111 @@
+/* General Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    text-align: left;
+    color: #333;
+  }
+  
+  /* Table Header */
+  table thead th {
+    background-color: #007BFF; /* Blue theme */
+    color: white;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: 1px solid #0056b3; /* Darker blue for border */
+  }
+  
+  /* Table Body Rows */
+  table tbody tr:nth-child(even) {
+    background-color: #f2f9ff; /* Light blue for alternate rows */
+  }
+  
+  table tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+  }
+  
+  /* Table Cells */
+  table tbody td {
+    padding: 10px 15px;
+    border: 1px solid #d0e4f7; /* Soft blue border */
+  }
+  
+  /* Hover Effect */
+  table tbody tr:hover {
+    background-color: #e1f0ff; /* Slightly darker blue on hover */
+    cursor: pointer;
+  }
+  
+  /* Optional: Table Caption Styling */
+  table caption {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #0056b3;
+  }
+  
+  
+/* Login container styles */
+.login-container {
+    position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+    z-index: 2;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    background-color: #fff;  /* White background for the form */
+    padding: 20px;  /* Padding around the form */
+    border-radius: 8px;  /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);  /* Subtle shadow effect */
+    width: 500px;  /* Fixed width */
+    margin: 0 auto;
+}
+.container{
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#alert{
+    border-radius: 300px;
+    margin: 0 auto;
+    background-color: red;
+    color:white;
+    cursor: pointer;
+    width: 90%;
+    height: 150%;
+}
+#alert:hover{
+background-color: rgb(109, 3, 3);
+}
+  .main-container{
+    background-image: url('world-map.webp') ;
+    background-size: cover;  /* Cover the entire viewport */
+    background-position: center;  /* Center the image */
+    background-repeat: no-repeat;  /* Prevent repeating the image */
+    filter: blur(3px);
+    z-index: 0;
+    height: 100vh;
+}
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 6px solid #f3f3f3; /* Light gray background of spinner */
+    border-top: 6px solid #007BFF; /* Blue spinner color */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 50px auto; /* Center the spinner */
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }

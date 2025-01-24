@@ -1,11 +1,16 @@
 <div class="main-container"></div>
 <div class="login-container">
     <form (submit)="onLogin()">
-      <h2>Login</h2>
+      <h2>Signup</h2>
   
       <div class="form-group">
-        <label for="username">Username:</label>
-        <input [(ngModel)]="username" name="username" type="text" class="form-control" required>
+        <label for="name">Name:</label>
+        <input [(ngModel)]="name" name="name" type="text" class="form-control" required>
+      </div>
+
+      <div class="form-group">
+        <label for="username">Email:</label>
+        <input [(ngModel)]="username" name="username" type="email" class="form-control" required>
       </div>
   
       <div class="form-group">
@@ -15,8 +20,8 @@
   
       <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
   
-      <button type="submit" class="btn btn-primary">Login</button>
+      <button type="submit" class="btn btn-primary">Signup</button>
     </form>
     <br>
-    <a href="/signup">Signup</a>
+    <a href="/login">Login instead</a>
   </div>
