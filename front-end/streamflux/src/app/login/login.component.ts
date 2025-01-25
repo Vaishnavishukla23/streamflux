@@ -33,8 +33,8 @@ export class LoginComponent {
 
     }
     else{
-    // this.http.post<any>('https://streamflux.onrender.com/api/login', credentials)
-    this.http.post<any>('http://127.0.0.1:5000/api/login', credentials)
+    this.http.post<any>('https://streamflux.onrender.com/api/login', credentials)
+    // this.http.post<any>('http://127.0.0.1:5000/api/login', credentials)
       .subscribe({
         next: (response) => {
           if (response.success) {

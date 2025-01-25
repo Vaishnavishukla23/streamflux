@@ -8,8 +8,8 @@ import { Path } from 'leaflet';
 })
 export class FlaskApiService {
 
-  // private apiUrl = 'https://streamflux.onrender.com/'; 
-  private apiUrl = 'http://127.0.0.1:5000/';
+  private apiUrl = 'https://streamflux.onrender.com/'; 
+  // private apiUrl = 'http://127.0.0.1:5000/';
 
   constructor(private http: HttpClient) { }
 
@@ -22,6 +22,7 @@ export class FlaskApiService {
   getUsers(): Observable<any> {
     return this.http.get<any>(this.apiUrl+"users");
   }
+  
   sendAlertAPI(): Observable<any> {
     return this.http.get<any>(this.apiUrl+"alert");
   }

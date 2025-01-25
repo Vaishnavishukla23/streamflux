@@ -5,7 +5,6 @@ from pymongo import MongoClient
 import os
 import smtplib
 
-import requests
 
 import pymongo
 
@@ -48,7 +47,7 @@ def sendAlert():
     result=[i['user'] for i in list(db['users'].find({},{'_id':0,'user':1}))]
     print(result)
     recipient_emails = result
-    [ "vaishnavi.shukla567@gmail.com", "harsri1705@gmail.com"]
+    # [ "vaishnavi.shukla567@gmail.com", "harsri1705@gmail.com"]
     subject = "ALERT!!!!"
     message = "Hello! This is an Alert email sent by the STREAMFLUX ADMIN."
 

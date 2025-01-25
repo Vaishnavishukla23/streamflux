@@ -30,8 +30,8 @@ export class SignupComponent {
       name: this.name
     };
   
-    // this.http.post<any>('https://streamflux.onrender.com/api/adduser', credentials)
-    this.http.post<any>('http://127.0.0.1:5000/api/adduser', credentials)
+    this.http.post<any>('https://streamflux.onrender.com/api/adduser', credentials)
+    // this.http.post<any>('http://127.0.0.1:5000/api/adduser', credentials)
       .subscribe({
         next: (response) => {
           if (response.success) {
