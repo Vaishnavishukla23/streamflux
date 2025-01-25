@@ -4,9 +4,6 @@ from flask_cors import CORS
 from pymongo import MongoClient
 import os
 import smtplib
-
-import requests
-
 import pymongo
 
 app = Flask(__name__)
